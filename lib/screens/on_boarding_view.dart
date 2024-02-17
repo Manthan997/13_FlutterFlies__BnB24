@@ -3,6 +3,7 @@ import 'package:health_tech/constants.dart';
 import 'package:health_tech/screens/custom_icon_button.dart';
 import 'package:health_tech/screens/custom_indicator.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
+import 'package:health_tech/screens/loginPage.dart';
 import 'package:health_tech/screens/on_boarding_card.dart';
 import 'package:health_tech/screens/on_boarding_list.dart';
 import 'package:health_tech/screens/primary_button.dart';
@@ -20,6 +21,7 @@ class EdenOnboardingView extends StatefulWidget {
 class _EdenOnboardingViewState extends State<EdenOnboardingView> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +104,18 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
             onPressed: () {
               if (_currentIndex == (onboardingList.length - 1)) {
                 // Handle 'Get Started' button action
+                 Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SignInView()),
+      );
               } else {
                 // Handle 'Skip' button action
+                // return animateToPage((onboardingList.length - 1), duration: duration, curve: curve);
+                _pageController.jumpToGivenPage(
+                    page:  (onboardingList.length - 1),
+                    duration: const Duration(milliseconds: 010),
+                    curve: Curves.ease,
+                  );
               }
             },
             text: _currentIndex == (onboardingList.length - 1)
