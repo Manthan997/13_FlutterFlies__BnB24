@@ -1,10 +1,13 @@
 
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
 import 'package:health_tech/screens/primary_button.dart';
+import 'package:health_tech/services/firebase_auth_methods.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -18,6 +21,15 @@ class _SignInViewState extends State<SignInView> {
   final _shakeKey = GlobalKey<ShakeWidgetState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void signUpUser() async{
+    // call the sign in method
+    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+      email: _emailController.text,
+      password: _passwordController.text,
+      context: context,
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,13 +84,17 @@ class _SignInViewState extends State<SignInView> {
                 shakeOffset: 10.0,
                 shakeDuration: const Duration(milliseconds: 500),
                 child: PrimaryButton(
-                  onTap: () {
-                    if (_emailController.text.isNotEmpty &&
-                        _passwordController.text.isNotEmpty) {
-                    } else {
-                      _shakeKey.currentState?.shake();
-                    }
-                  },
+                  onTap: signUpUser,
+                  // () {
+                  //   if (_emailController.text.isNotEmpty &&
+                  //       _passwordController.text.isNotEmpty) {
+                  //         // call the sign in method
+                          
+                  //         print("object")
+                  //   } else {
+                  //     _shakeKey.currentState?.shake();
+                  //   }
+                  // },
                   text: 'Login',
                 ),
               ),

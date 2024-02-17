@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "6030463348",
+    "project_id": "doctors-4d750",
+    "storage_bucket": "doctors-4d750.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6030463348:android:67fb41e37fea46ad305c21",
+        "android_client_info": {
+          "package_name": "com.example.health_tech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBM9il2IpbkLgxVFS-ZkoujcVxOJ3caIJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
