@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:health_tech/providers/userprovider.dart';
+import 'package:provider/provider.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   @override
@@ -20,8 +22,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     _getUserData();
   }
 
+  void updateuserprovider() {
+    Provider.of<UserProvider>(context, listen: false).setUname(_nameController.text, "user");
+    _updateProfile();
+  }
+
   Future<void> _getUserData() async {
-    User user = FirebaseAuth.instance.currentUser as User;
+    User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       setState(() {
         _user = user;
@@ -80,7 +87,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _updateProfile,
+              onPressed: updateuserprovider,
               child: Text('Update Profile'),
             ),
           ],

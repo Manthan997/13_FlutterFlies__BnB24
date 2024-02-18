@@ -1,10 +1,11 @@
 
 import 'dart:math';
-
+// import 'package:health_tech/screens/update_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health_tech/screens/admin.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
 import 'package:health_tech/screens/primary_button.dart';
 import 'package:health_tech/screens/signup_induction.dart';
@@ -31,11 +32,20 @@ class _SignInViewState extends State<SignInView> {
     //   context: context,
     
     // Provider.of<UserProvider>(context, listen: false).setUname(_emailController.text, "Doctor");
+    if (_emailController.text == "admin") {
+            // call the sign in method
+            // print("object");
      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AdminHomeScreen()),
+      );
+    
+  }else{
+    Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
       );
-    
+  }
   }
      
   @override
