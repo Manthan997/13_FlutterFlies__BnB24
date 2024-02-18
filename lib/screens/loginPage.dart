@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
 import 'package:health_tech/screens/primary_button.dart';
+import 'package:health_tech/screens/signup_induction.dart';
 import 'package:health_tech/services/firebase_auth_methods.dart';
 
 class SignInView extends StatefulWidget {
@@ -22,14 +23,21 @@ class _SignInViewState extends State<SignInView> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  void signUpUser() async{
+  void signUpUser(){
     // call the sign in method
-    FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-      email: _emailController.text,
-      password: _passwordController.text,
-      context: context,
-    );
+    // FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+    //   email: _emailController.text,
+    //   password: _passwordController.text,
+    //   context: context,
+    
+    // Provider.of<UserProvider>(context, listen: false).setUname(_emailController.text, "Doctor");
+     Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
+      );
+    
   }
+     
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +51,7 @@ class _SignInViewState extends State<SignInView> {
               const SizedBox(height: 100),
               const Center(
                 child: Text(
-                  'Welcome Back',
+                  "Let's Get Started",
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,

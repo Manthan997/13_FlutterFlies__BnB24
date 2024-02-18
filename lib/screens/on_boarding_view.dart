@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:health_tech/constants.dart';
+import 'package:health_tech/screens/appointment.dart';
 import 'package:health_tech/screens/custom_icon_button.dart';
 import 'package:health_tech/screens/custom_indicator.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
+import 'package:health_tech/screens/homepage.dart';
 import 'package:health_tech/screens/loginPage.dart';
 import 'package:health_tech/screens/on_boarding_card.dart';
 import 'package:health_tech/screens/on_boarding_list.dart';
 import 'package:health_tech/screens/primary_button.dart';
+import 'package:health_tech/screens/sign_up.dart';
 import 'package:health_tech/screens/wave_card.dart';
 
 class EdenOnboardingView extends StatefulWidget {
@@ -88,6 +91,10 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
               onTap: () {
                 if (_currentIndex == (onboardingList.length - 1)) {
                   // Handle last page action
+                  Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => SignInView()),
+      );
                 } else {
                   _pageController.nextPage(
                     duration: const Duration(milliseconds: 500),
@@ -106,7 +113,7 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
                 // Handle 'Get Started' button action
                  Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => SignInView()),
+        MaterialPageRoute(builder: (context) => LogInView()),
       );
               } else {
                 // Handle 'Skip' button action
