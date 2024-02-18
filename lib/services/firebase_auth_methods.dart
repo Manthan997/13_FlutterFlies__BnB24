@@ -7,6 +7,9 @@ class FirebaseAuthMethods {
   final FirebaseAuth _auth;
   FirebaseAuthMethods(this._auth);
 
+//state persistance
+  Stream<User?> get authState => _auth.authStateChanges();
+
   // Future<User?> signInWithGoogle() async {
   //   try {
   //     final GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();

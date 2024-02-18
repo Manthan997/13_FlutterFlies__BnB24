@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:health_tech/providers/userprovider.dart';
-import 'package:provider/provider.dart';
+import 'package:health_tech/screens/homepage.dart';
+// import 'package:provider/provider.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   @override
@@ -14,53 +15,67 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _genderController = TextEditingController();
 
-  User _user = FirebaseAuth.instance.currentUser as User; //
-
-  @override
-  void initState() {
-    super.initState();
-    _getUserData();
-  }
+  // User _user = FirebaseAuth.instance.currentUser as User; //
+  var db = FirebaseFirestore.instance;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _getUserData();
+  // }
 
   void updateuserprovider() {
-    Provider.of<UserProvider>(context, listen: false).setUname(_nameController.text, "user");
-    _updateProfile();
+    // Provider.of<UserProvider>(context, listen: false).setUname(_nameController.text, "user");
+    // _updateProfile();
+    final user = <String, dynamic>{
+  "name": _nameController.text,
+  "age": _ageController.text,
+  "gender": _genderController.text,
+};
+
+// Add a new document with a generated ID
+db.collection("userData").add(user).then((DocumentReference doc) =>
+    print('DocumentSnapshot added with ID: ${doc.id}'));
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
   }
 
-  Future<void> _getUserData() async {
-    User? user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      setState(() {
-        _user = user;
-      });
-      // Retrieve user data from Firestore if available
-      DocumentSnapshot userData =
-          await FirebaseFirestore.instance.collection('patients').doc(user.uid).get();
-      if (userData.exists) {
-        _nameController.text = userData['name'];
-        _ageController.text = userData['age'];
-        _genderController.text = userData['gender'];
-      }
-    }
-  }
+  // Future<void> _getUserData() async {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   if (user != null) {
+  //     setState(() {
+  //       _user = user;
+  //     });
+  //     // Retrieve user data from Firestore if available
+  //     DocumentSnapshot userData =
+  //         await FirebaseFirestore.instance.collection('patients').doc(user.uid).get();
+  //     if (userData.exists) {
+  //       _nameController.text = userData['name'];
+  //       _ageController.text = userData['age'];
+  //       _genderController.text = userData['gender'];
+  //     }
+  //   }
+  // }
 
-  Future<void> _updateProfile() async {
-    try {
-      await FirebaseFirestore.instance.collection('patients').doc(_user.uid).set({
-        'name': _nameController.text,
-        'age': _ageController.text,
-        'gender': _genderController.text,
-      }, SetOptions(merge: true));
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully')),
-      );
-    } catch (error) {
-      print('Error updating profile: $error');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update profile')),
-      );
-    }
-  }
+  // Future<void> _updateProfile() async {
+  //   try {
+  //     await FirebaseFirestore.instance.collection('patients').doc(_user.uid).set({
+  //       'name': _nameController.text,
+  //       'age': _ageController.text,
+  //       'gender': _genderController.text,
+  //     }, SetOptions(merge: true));
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Profile updated successfully')),
+  //     );
+  //   } catch (error) {
+  //     print('Error updating profile: $error');
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       SnackBar(content: Text('Failed to update profile')),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -7,18 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_tech/screens/admin.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
+import 'package:health_tech/screens/homepage.dart';
 import 'package:health_tech/screens/primary_button.dart';
 import 'package:health_tech/screens/signup_induction.dart';
 import 'package:health_tech/services/firebase_auth_methods.dart';
+// import 'package:provider/provider.dart';
 
-class SignInView extends StatefulWidget {
-  const SignInView({super.key});
+class LogInView extends StatefulWidget {
+  const LogInView({super.key});
 
   @override
-  State<SignInView> createState() => _SignInViewState();
+  State<LogInView> createState() => _LogInViewState();
 }
 
-class _SignInViewState extends State<SignInView> {
+class _LogInViewState extends State<LogInView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _shakeKey = GlobalKey<ShakeWidgetState>();
   final TextEditingController _emailController = TextEditingController();
@@ -26,13 +28,14 @@ class _SignInViewState extends State<SignInView> {
 
   void signUpUser(){
     // call the sign in method
-    // FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
+    //  FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
     //   email: _emailController.text,
     //   password: _passwordController.text,
-    //   context: context,
+    //   context: context,);
     
     // Provider.of<UserProvider>(context, listen: false).setUname(_emailController.text, "Doctor");
-    if (_emailController.text == "admin") {
+    //  final user = context.read<User?>();
+if (_emailController.text == "admin") {
             // call the sign in method
             // print("object");
      Navigator.push(
@@ -43,9 +46,10 @@ class _SignInViewState extends State<SignInView> {
   }else{
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
+        MaterialPageRoute(builder: (context) => HomePage()),
       );
   }
+   
   }
      
   @override
@@ -266,99 +270,7 @@ class DividerWithText extends StatelessWidget {
   }
 }
 
-// class PrimaryButton extends StatefulWidget {
-//   final VoidCallback onTap;
-//   final String text;
-//   final double? width;
-//   final double? height;
-//   final double? borderRadius;
-//   final double? fontSize;
-//   final Color? color;
-//   const PrimaryButton({
-//     required this.onTap,
-//     required this.text,
-//     this.height,
-//     this.width,
-//     this.borderRadius,
-//     this.fontSize,
-//     this.color,
-//     Key? key,
-//   }) : super(key: key);
 
-//   @override
-//   State<PrimaryButton> createState() => _PrimaryButtonState();
-// }
-
-// class _PrimaryButtonState extends State<PrimaryButton>
-//     with SingleTickerProviderStateMixin {
-//   late AnimationController _controller;
-//   final Duration _animationDuration = const Duration(milliseconds: 300);
-//   final Tween<double> _tween = Tween<double>(begin: 1.0, end: 0.95);
-//   @override
-//   void initState() {
-//     _controller = AnimationController(
-//       vsync: this,
-//       duration: _animationDuration,
-//     )..addListener(() {
-//         setState(() {});
-//       });
-//     super.initState();
-//   }
-
-//   @override
-//   void dispose() {
-//     _controller.dispose();
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         _controller.forward();
-//         // .then(() {
-//           _controller.reverse();
-//         // });
-//         widget.onTap();
-//       },
-//       child: ScaleTransition(
-//         scale: _tween.animate(
-//           CurvedAnimation(
-//             parent: _controller,
-//             curve: Curves.easeOut,
-//             reverseCurve: Curves.easeIn,
-//           ),
-//         ),
-//         child: Container(
-//           height: widget.height ?? 60,
-//           alignment: Alignment.center,
-//           width: widget.width ?? double.maxFinite,
-//           decoration: BoxDecoration(
-//             color: widget.color ?? const Color(0xFF329494),
-//             boxShadow: [
-//               BoxShadow(
-//                 color: const Color(0xFF329494).withOpacity(0.2),
-//                 blurRadius: 7,
-//                 offset: const Offset(0, 5),
-//               )
-//             ],
-//             borderRadius: BorderRadius.circular(
-//               widget.borderRadius ?? 10,
-//             ),
-//           ),
-//           child: Text(
-//             widget.text,
-//             style: TextStyle(
-//               fontWeight: FontWeight.bold,
-//               color: widget.color == null ? Colors.white : Colors.black,
-//               fontSize: widget.fontSize ?? 20,
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 abstract class ShakeAnimation<T extends StatefulWidget> extends State<T>
     with SingleTickerProviderStateMixin {

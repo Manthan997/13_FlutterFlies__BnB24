@@ -1,10 +1,14 @@
+// import 'dart:js';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:health_tech/firebase_options.dart';
 import 'package:health_tech/providers/onboarding_provider.dart';
 import 'package:health_tech/providers/userprovider.dart';
 import 'package:health_tech/screens/on_boarding_view.dart';
-import 'package:provider/provider.dart';
+import 'package:health_tech/services/firebase_auth_methods.dart';
+// import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,15 +16,18 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
-        // ChangeNotifierProvider(create: (context) => OtherProvider()),
-        // Add other providers as needed
-      ],
-      child: MyApp(),
-    ),
-  );
+    // MultiProvider(
+      // providers: [
+      //   ChangeNotifierProvider<OnboardingProvider>(create: (context) => OnboardingProvider()),
+      //   Provider<FirebaseAuth >(create: (_) => FirebaseAuth.instance),
+      //   StreamProvider(create: (context) => context.read<FirebaseAuthMethods>().authState,
+      //    initialData: null,)
+      //   // ChangeNotifierProvider(create: (context) => OtherProvider()),
+      //   // Add other providers as needed
+      // ],
+      MyApp(),
+    );
+  
 }
 
 
@@ -28,15 +35,12 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => OnboardingProvider(),
-      child: MaterialApp(
+    return MaterialApp(
         title: 'Your App Name',
         theme: ThemeData(
             // Your theme data...
             ),
-        home: EdenOnboardingView(),
-      ),
-    );
+        home: const EdenOnboardingView(),
+      );
   }
 }

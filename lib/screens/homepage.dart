@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:health_tech/providers/userprovider.dart';
-import 'package:provider/provider.dart';
+import 'package:health_tech/screens/appointment.dart';
+import 'package:health_tech/screens/home3.dart';
+import 'package:health_tech/screens/signup_induction.dart';
+import 'package:health_tech/screens/webview_page.dart';
+// import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-var username = Provider.of<UserProvider>(context).username;
+// var username = Provider.of<UserProvider>(context).username;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('welcome $username'),
+        title: Text('welcome user'),
         actions: const [
           CircleAvatar(
             backgroundImage: NetworkImage('URL_TO_PROFILE_PICTURE'),
@@ -22,15 +26,37 @@ var username = Provider.of<UserProvider>(context).username;
         child: ListView(
           children: [
             ListTile(
-              title: Text('Option 1'),
+              title: Text('apointment'),
               onTap: () {
                 // Handle option 1
+                
+                Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => AppointmentPage()),
+      );
+                
               },
             ),
             ListTile(
-              title: Text('Option 2'),
+              title: Text('arVIEV'),
+              onTap: () {
+                // Handle option 1
+                
+                Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage2()),
+      );
+                
+              },
+            ),
+            ListTile(
+              title: Text('Video Appointment'),
               onTap: () {
                 // Handle option 2
+                Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage3()),
+      );
               },
             ),
           ],

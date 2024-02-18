@@ -1,3 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:health_tech/services/firebase_auth_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:health_tech/constants.dart';
 import 'package:health_tech/screens/appointment.dart';
@@ -11,6 +14,7 @@ import 'package:health_tech/screens/on_boarding_list.dart';
 import 'package:health_tech/screens/primary_button.dart';
 import 'package:health_tech/screens/sign_up.dart';
 import 'package:health_tech/screens/wave_card.dart';
+// import 'package:provider/provider.dart';
 
 class EdenOnboardingView extends StatefulWidget {
   const EdenOnboardingView({
@@ -25,6 +29,7 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
 
+  var db = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +96,16 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
               onTap: () {
                 if (_currentIndex == (onboardingList.length - 1)) {
                   // Handle last page action
+                  // Create a new user with a first and last name
+// final user = <String, dynamic>{
+//   "first": "riya",
+//   "last": "Lovelace",
+//   "born": 1815
+// };
+
+// // Add a new document with a generated ID
+// db.collection("users").add(user).then((DocumentReference doc) =>
+//     print('DocumentSnapshot added with ID: ${doc.id}'));
                   Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SignInView()),
@@ -135,3 +150,17 @@ class _EdenOnboardingViewState extends State<EdenOnboardingView> {
     );
   }
 }
+
+
+// class AuthWrapper extends StatelessWidget {
+//   const AuthWrapper({Key? key}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     final user = context.watch<User?>();
+
+//     if (user != null) {
+//       return HomePage();
+//     }
+//     return LogInView();
+//   }
+// }

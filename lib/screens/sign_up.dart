@@ -1,5 +1,6 @@
 
 import 'dart:math';
+import 'package:health_tech/screens/admin.dart';
 import 'package:health_tech/screens/homepage.dart';
 import 'package:health_tech/screens/loginPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,18 +9,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:health_tech/screens/custom_text_button.dart';
 import 'package:health_tech/screens/primary_button.dart';
+import 'package:health_tech/screens/signup_induction.dart';
+import 'package:health_tech/screens/webview_page.dart';
 import 'package:health_tech/services/firebase_auth_methods.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
 import 'package:health_tech/providers/userprovider.dart';
 
-class LogInView extends StatefulWidget {
-  const LogInView({super.key});
+class SignInView extends StatefulWidget {
+  const SignInView({super.key});
 
   @override
-  State<LogInView> createState() => _LogInViewState();
+  State<SignInView> createState() => _SignInViewState();
 }
 
-class _LogInViewState extends State<LogInView> {
+class _SignInViewState extends State<SignInView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _shakeKey = GlobalKey<ShakeWidgetState>();
   final TextEditingController _emailController = TextEditingController();
@@ -32,12 +35,18 @@ class _LogInViewState extends State<LogInView> {
     //   password: _passwordController.text,
     //   context: context,
     // );
-    Provider.of<UserProvider>(context, listen: false).setUname(_emailController.text, "Doctor");
-     Navigator.push(
+    
+    Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => UpdateProfileScreen()),
       );
   }
+  //   Provider.of<UserProvider>(context, listen: false).setUname(_emailController.text, "Doctor");
+  //    Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => HomePage()),
+  //     );
+  // }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
